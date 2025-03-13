@@ -14,6 +14,16 @@ class App {
         origin: "*",
       },
     });
+
+    // Escutar a rota /teste
+    this.app.get("/teste", (req, res) => {
+      res.status(200).json("Rota de teste!");
+    });
+
+    // O evento escutado será disparado qdo o cliente for conectado
+    this.socketIo.on("connection", () => {
+      console.log("teste de socket.io");
+    });
   }
 }
 
