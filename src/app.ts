@@ -21,8 +21,19 @@ class App {
     });
 
     // O evento escutado será disparado qdo o cliente for conectado
-    this.socketIo.on("connection", () => {
-      console.log("teste de socket.io");
+    this.socketIo.on("connection", (socket) => {
+      console.log("Usuário conectado");
+
+      socket.on("disconnect", () => {
+        console.log("Usuário desconectado");
+      });
+      // Podemos criar canais. Exemplo: abacaxi
+      socket.on("abacaxi", () => console.log("acessou o evento abacaxi"));
+
+      // Criando o canal de menssagens
+      socket.on("message", (message) => {
+        this.socketIo.emit("message", message);
+      });
     });
   }
 }
